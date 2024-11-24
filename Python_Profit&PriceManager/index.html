@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Price</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Add New Price</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="product">Product</label>
+                <input type="text" id="product" value="Jawar Dosa Mix" disabled>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="jawarRetail">Jawar (Sorghum Flour) Retail (Calculate) Rate</label>
+                    <input type="number" id="jawarRetail">
+                </div>
+                <div class="form-group">
+                    <label for="jawarWholeSale">Jawar (Sorghum Flour) Whole-sale (Purchase) Rate</label>
+                    <input type="number" id="jawarWholeSale">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="dalRetail">White Urad Dal Mogar Retail (Calculate) Rate</label>
+                    <input type="number" id="dalRetail">
+                </div>
+                <div class="form-group">
+                    <label for="dalWholeSale">White Urad Dal Mogar Whole-sale (Purchase) Rate</label>
+                    <input type="number" id="dalWholeSale">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="saltRetail">Salt Retail (Calculate) Rate</label>
+                    <input type="number" id="saltRetail">
+                </div>
+                <div class="form-group">
+                    <label for="saltWholeSale">Salt Whole-sale (Purchase) Rate</label>
+                    <input type="number" id="saltWholeSale">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="weightLoss">Weight Loss</label>
+                <input type="number" id="weightLoss">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="gas">Gas</label>
+                    <input type="number" id="gas">
+                </div>
+                <div class="form-group">
+                    <label for="ownerLabour">Owner Labour</label>
+                    <input type="number" id="ownerLabour">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="electricity">Electricity</label>
+                    <input type="number" id="electricity">
+                </div>
+                <div class="form-group">
+                    <label for="transport">Transport</label>
+                    <input type="number" id="transport">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="rent">Rent</label>
+                    <input type="number" id="rent">
+                </div>
+                <div class="form-group">
+                    <label for="maintenance">Maintenance</label>
+                    <input type="number" id="maintenance">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="labour">Labour</label>
+                    <input type="number" id="labour">
+                </div>
+                <div class="form-group">
+                    <label for="extra">Extra</label>
+                    <input type="number" id="extra">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="profitType">Profit Type</label>
+                    <select id="profitType">
+                        <option value="select">Select...</option>
+                        <option value="fixed">Fixed</option>
+                        <option value="percentage">Percentage</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="profit">Profit</label>
+                    <input type="number" id="profit">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="distributor">Distributor %</label>
+                    <input type="number" id="distributor" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="wholeSeller">Whole Seller %</label>
+                    <input type="number" id="wholeSeller" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="retailer">Retailer %</label>
+                    <input type="number" id="retailer" value="0">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="packagingCost">Packaging Cost</label>
+                <input type="number" id="packagingCost">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="calculate-btn">Calculate Cost</button>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="distributorResult">Distributor</label>
+                    <input type="text" id="distributorResult" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="wholeSaleResult">Whole Saler</label>
+                    <input type="text" id="wholeSaleResult" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="retailerResult">Retailer</label>
+                    <input type="text" id="retailerResult" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="mrpResult">MRP</label>
+                    <input type="text" id="mrpResult" disabled>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
