@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from waitress import serve
+import logging
 
 app = Flask(__name__)
 
@@ -61,6 +62,9 @@ def calculate_prices(data):
         # Handle invalid input data (e.g., non-numeric input)
         return str(e), None, None, None
 
+    logging.basicConfig(level=logging.DEBUG)
+    logging.debug(data)
+    
 @app.route("/", methods=["GET", "POST"])
 def index():
     distributor_price = wholesaler_price = retailer_price = mrp = None
@@ -69,8 +73,7 @@ def index():
     if request.method == "POST":
         data = request.form
         distributor_price, wholesaler_price, retailer_price, mrp = calculate_prices(data)
-        
-        # If there's an error, capture the error message
+
         if isinstance(distributor_price, str):  # This indicates an error message
             error_message = distributor_price
             distributor_price = wholesaler_price = retailer_price = mrp = None
@@ -87,3 +90,4 @@ def index():
 if __name__ == "__main__":
     # Use waitress to serve the app
     serve(app, host='0.0.0.0', port=8000)
+
