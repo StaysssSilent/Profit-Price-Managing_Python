@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profit and Price Management</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
@@ -13,11 +13,11 @@
 
         <h2>Add New Price</h2>
 
-        <form method="POST">
+        <form method="POST" action="/">
 
             <div class="form-group">
                 <label for="product">Product</label>
-                <input type="text" id="product" value="Jawar Dosa Mix" disabled>
+                <input type="text" id="product" value="Jawar Dosa Mix" readonly>
             </div>
 
             <!-- Jawar Retail and Wholesale -->
@@ -26,6 +26,7 @@
                     <label for="jawarRetail">Jawar (Sorghum Flour) Retail (Calculate) Rate</label>
                     <input type="number" id="jawarRetail" name="jawarRetail">
                 </div>
+                
                 <div class="form-group">
                     <label for="jawarWholeSale">Jawar (Sorghum Flour) Whole-sale (Purchase) Rate</label>
                     <input type="number" id="jawarWholeSale" name="jawarWholeSale">
@@ -38,6 +39,7 @@
                     <label for="dalRetail">White Urad Dal Mogar Retail (Calculate) Rate</label>
                     <input type="number" id="dalRetail" name="dalRetail">
                 </div>
+
                 <div class="form-group">
                     <label for="dalWholeSale">White Urad Dal Mogar Whole-sale (Purchase) Rate</label>
                     <input type="number" id="dalWholeSale" name="dalWholeSale">
@@ -50,6 +52,7 @@
                     <label for="saltRetail">Salt Retail (Calculate) Rate</label>
                     <input type="number" id="saltRetail" name="saltRetail">
                 </div>
+
                 <div class="form-group">
                     <label for="saltWholeSale">Salt Whole-sale (Purchase) Rate</label>
                     <input type="number" id="saltWholeSale" name="saltWholeSale">
@@ -68,6 +71,7 @@
                     <label for="gas">Gas</label>
                     <input type="number" id="gas" name="gas">
                 </div>
+
                 <div class="form-group">
                     <label for="ownerLabour">Owner Labour</label>
                     <input type="number" id="ownerLabour" name="ownerLabour">
@@ -79,6 +83,7 @@
                     <label for="electricity">Electricity</label>
                     <input type="number" id="electricity" name="electricity">
                 </div>
+
                 <div class="form-group">
                     <label for="transport">Transport</label>
                     <input type="number" id="transport" name="transport">
@@ -90,6 +95,7 @@
                     <label for="rent">Rent</label>
                     <input type="number" id="rent" name="rent">
                 </div>
+
                 <div class="form-group">
                     <label for="maintenance">Maintenance</label>
                     <input type="number" id="maintenance" name="maintenance">
@@ -101,6 +107,7 @@
                     <label for="labour">Labour</label>
                     <input type="number" id="labour" name="labour">
                 </div>
+
                 <div class="form-group">
                     <label for="extra">Extra</label>
                     <input type="number" id="extra" name="extra">
@@ -117,6 +124,7 @@
                         <option value="percentage">Percentage</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label for="profit">Profit</label>
                     <input type="number" id="profit" name="profit">
@@ -128,14 +136,17 @@
                     <label for="packagingCost">Packaging Cost</label>
                     <input type="number" id="packagingCost" name="packagingCost">
                 </div>
+
                 <div class="form-group">
                     <label for="distributor">Distributor %</label>
                     <input type="number" id="distributor" name="distributor" value="0">
                 </div>
+
                 <div class="form-group">
                     <label for="wholeSeller">Whole Seller %</label>
                     <input type="number" id="wholeSeller" name="wholeSeller" value="0">
                 </div>
+
                 <div class="form-group">
                     <label for="retailer">Retailer %</label>
                     <input type="number" id="retailer" name="retailer" value="0">
@@ -143,27 +154,29 @@
             </div>
 
             <div class="form-group">
-                
                 <button type="submit" class="calculate-btn">Calculate Cost</button>
             </div>
-
+            
             <!-- Results Section -->
             <div class="form-row">
                 <div class="form-group">
                     <label for="distributorResult">Distributor</label>
-                    <input type="text" id="distributorResult" value="{{ distributor_price }}" disabled>
+                    <input type="text" id="distributorResult" value="{{ distributor_price }}" readonly>
                 </div>
+
                 <div class="form-group">
                     <label for="wholeSaleResult">Whole Sale</label>
-                    <input type="text" id="wholeSaleResult" value="{{ wholesaler_price }}" disabled>
+                    <input type="text" id="wholeSaleResult" value="{{ wholesaler_price }}" readonly>
                 </div>
+
                 <div class="form-group">
                     <label for="retailerResult">Retailer</label>
-                    <input type="text" id="retailerResult" value="{{ retailer_price }}" disabled>
+                    <input type="text" id="retailerResult" value="{{ retailer_price }}" readonly>
                 </div>
+
                 <div class="form-group">
                     <label for="mrpResult">MRP</label>
-                    <input type="text" id="mrpResult" value="{{ mrp }}" disabled>
+                    <input type="text" id="mrpResult" value="{{ mrp }}" readonly>
                 </div>
             </div>
         </form>
