@@ -1,93 +1,61 @@
 from flask import Flask, render_template, request
-from waitress import serve
-import logging
 
 app = Flask(__name__)
 
-def calculate_prices(data):
-    try:
-        # Get data from form and convert to float, with default values if missing
-        jawar_retail = float(data.get('jawarRetail', 0))
-        jawar_wholesale = float(data.get('jawarWholeSale', 0))
-        dal_retail = float(data.get('dalRetail', 0))
-        dal_wholesale = float(data.get('dalWholeSale', 0))
-        salt_retail = float(data.get('saltRetail', 0))
-        salt_wholesale = float(data.get('saltWholeSale', 0))
-        weight_loss = float(data.get('weightLoss', 0))
-        gas = float(data.get('gas', 0))
-        owner_labour = float(data.get('ownerLabour', 0))
-        electricity = float(data.get('electricity', 0))
-        transport = float(data.get('transport', 0))
-        rent = float(data.get('rent', 0))
-        maintenance = float(data.get('maintenance', 0))
-        labour = float(data.get('labour', 0))
-        extra = float(data.get('extra', 0))
-        packaging_cost = float(data.get('packagingCost', 0))
+@app.route('/', methods=['GET', 'POST'])
+def calculate_cost():
+    if request.method == 'POST':
+        # Retrieve form data
+        jawar_retail = float(request.form.get('jawarRetail', 0))
+        jawar_wholesale = float(request.form.get('jawarWholeSale', 0))
+        dal_retail = float(request.form.get('dalRetail', 0))
+        dal_wholesale = float(request.form.get('dalWholeSale', 0))
+        salt_retail = float(request.form.get('saltRetail', 0))
+        salt_wholesale = float(request.form.get('saltWholeSale', 0))
+        weight_loss = float(request.form.get('weightLoss', 0))
+        gas = float(request.form.get('gas', 0))
+        owner_labour = float(request.form.get('ownerLabour', 0))
+        electricity = float(request.form.get('electricity', 0))
+        transport = float(request.form.get('transport', 0))
+        rent = float(request.form.get('rent', 0))
+        maintenance = float(request.form.get('maintenance', 0))
+        labour = float(request.form.get('labour', 0))
+        extra = float(request.form.get('extra', 0))
+        profit_type = request.form.get('profitType')
+        profit = float(request.form.get('profit', 0))
+        packaging_cost = float(request.form.get('packagingCost', 0))
+        distributor = float(request.form.get('distributor', 0))
+        whole_seller = float(request.form.get('wholeSeller', 0))
+        retailer = float(request.form.get('retailer', 0))
+
+        # Perform calculations
+        total_cost = jawar_wholesale + dal_wholesale + salt_wholesale + weight_loss + gas + owner_labour + electricity + transport + rent + maintenance + labour + extra + packaging_cost
         
-        # Default profit type and profit
-        profit_type = data.get('profitType', 'select')
-        profit = float(data.get('profit', 0))
-        
-        # Percentages
-        distributor_percent = float(data.get('distributor', 0))
-        wholesaler_percent = float(data.get('wholeSeller', 0))
-        retailer_percent = float(data.get('retailer', 0))
+        if profit_type == 'fixed':
+            profit_amount = profit
+        elif profit_type == 'percentage':
+            profit_amount = total_cost * (profit / 100)
+        else:
+            profit_amount = 0
 
-        # Check if profit_type is valid
-        if profit_type not in ["fixed", "percentage"]:
-            raise ValueError("Invalid profit type selected")
+        mrp = total_cost + profit_amount
+        distributor_price = mrp * (1 + distributor / 100)
+        wholesaler_price = mrp * (1 + whole_seller / 100)
+        retailer_price = mrp * (1 + retailer / 100)
 
-        # Calculate total cost
-        total_cost = (jawar_wholesale + dal_wholesale + salt_wholesale + weight_loss +
-                      gas + owner_labour + electricity + transport + rent + maintenance +
-                      labour + extra + packaging_cost)
-        
-        # Apply profit based on type
-        if profit_type == "fixed":
-            total_cost += profit
-        elif profit_type == "percentage":
-            total_cost += (total_cost * profit / 100)
-        
-        # Calculate price distribution
-        distributor_price = total_cost * (1 + distributor_percent / 100)
-        wholesaler_price = total_cost * (1 + wholesaler_percent / 100)
-        retailer_price = total_cost * (1 + retailer_percent / 100)
-        
-        # MRP Calculation (Maximum of distributor, wholesaler, retailer prices)
-        mrp = max(distributor_price, wholesaler_price, retailer_price)
-        
-        return distributor_price, wholesaler_price, retailer_price, mrp
-    
-    except ValueError as e:
-        # Handle invalid input data (e.g., non-numeric input)
-        return str(e), None, None, None
+        # Pass results to the template
+        return render_template('index.html', 
+                               distributor_price=distributor_price,
+                               wholesaler_price=wholesaler_price,
+                               retailer_price=retailer_price,
+                               mrp=mrp)
+    else:
+        # Initial page load
+        return render_template('index.html', 
+                               distributor_price=0,
+                               wholesaler_price=0,
+                               retailer_price=0,
+                               mrp=0)
 
-    logging.basicConfig(level=logging.DEBUG)
-    logging.debug(data)
-    
-@app.route("/", methods=["GET", "POST"])
-def index():
-    distributor_price = wholesaler_price = retailer_price = mrp = None
-    error_message = None
-    
-    if request.method == "POST":
-        data = request.form
-        distributor_price, wholesaler_price, retailer_price, mrp = calculate_prices(data)
-
-        if isinstance(distributor_price, str):  # This indicates an error message
-            error_message = distributor_price
-            distributor_price = wholesaler_price = retailer_price = mrp = None
-
-    return render_template(
-        'index.html', 
-        distributor_price=distributor_price, 
-        wholesaler_price=wholesaler_price, 
-        retailer_price=retailer_price, 
-        mrp=mrp,
-        error_message=error_message
-    )
-
-if __name__ == "__main__":
-    # Use waitress to serve the app
-    serve(app, host='0.0.0.0', port=8000)
-
+if __name__ == '__main__':
+    app.run(debug=True)
