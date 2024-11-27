@@ -1,4 +1,3 @@
 UI of the page :  
 
-  ![Screenshot 2024-11-24 174505](https://github.com/user-attachments/assets/31255cad-6af6-42aa-bc42-7bb4989b2b61)
-  ![Screenshot 2024-11-24 174529](https://github.com/user-attachments/assets/55a0cf4d-2122-4c62-a763-b94c3013d1b0)
+![Screenshot 2024-11-27 210207](https://github.com/user-attachments/assets/9d5d5626-f0fe-47e8-93d9-1e9fd4abb536)
