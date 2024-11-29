@@ -8,6 +8,18 @@
 </head>
 
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div>
+        {% for category, message in messages %}
+        <div class="flash-message flash-{{ category }}">
+            {{ message }}
+            <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
 
     <div class="container">
 
@@ -24,12 +36,12 @@
             <div class="form-row">
                 <div class="form-group">
                     <label for="jawarRetail">Jawar (Sorghum Flour) Retail (Calculate) Rate</label>
-                    <input type="number" id="jawarRetail" name="jawarRetail">
+                    <input type="number" id="jawarRetail" name="jawarRetail" value="{{ form_data.get('jawarRetail', '') }}">
                 </div>
                 
                 <div class="form-group">
                     <label for="jawarWholeSale">Jawar (Sorghum Flour) Whole-sale (Purchase) Rate</label>
-                    <input type="number" id="jawarWholeSale" name="jawarWholeSale">
+                    <input type="number" id="jawarWholeSale" name="jawarWholeSale" value="{{ form_data.get('jawarWholeSale', '') }}">
                 </div>
             </div>
 
@@ -37,12 +49,12 @@
             <div class="form-row">
                 <div class="form-group">
                     <label for="dalRetail">White Urad Dal Mogar Retail (Calculate) Rate</label>
-                    <input type="number" id="dalRetail" name="dalRetail">
+                    <input type="number" id="dalRetail" name="dalRetail" value="{{ form_data.get('dalRetail', '') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="dalWholeSale">White Urad Dal Mogar Whole-sale (Purchase) Rate</label>
-                    <input type="number" id="dalWholeSale" name="dalWholeSale">
+                    <input type="number" id="dalWholeSale" name="dalWholeSale" value="{{ form_data.get('dalWholeSale', '') }}">
                 </div>
             </div>
 
@@ -50,67 +62,67 @@
             <div class="form-row">
                 <div class="form-group">
                     <label for="saltRetail">Salt Retail (Calculate) Rate</label>
-                    <input type="number" id="saltRetail" name="saltRetail">
+                    <input type="number" id="saltRetail" name="saltRetail" value="{{ form_data.get('saltRetail', '') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="saltWholeSale">Salt Whole-sale (Purchase) Rate</label>
-                    <input type="number" id="saltWholeSale" name="saltWholeSale">
+                    <input type="number" id="saltWholeSale" name="saltWholeSale" value="{{ form_data.get('saltWholeSale', '') }}">
                 </div>
             </div>
 
             <!-- Other Fields -->
             <div class="form-group">
                 <label for="weightLoss">Weight Loss</label>
-                <input type="number" id="weightLoss" name="weightLoss">
+                <input type="number" id="weightLoss" name="weightLoss" value="{{ form_data.get('weightLoss', '') }}">
             </div>
             
             <!-- Utility Costs -->
             <div class="form-row">
                 <div class="form-group">
                     <label for="gas">Gas</label>
-                    <input type="number" id="gas" name="gas">
+                    <input type="number" id="gas" name="gas" value="{{ form_data.get('gas', '') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="ownerLabour">Owner Labour</label>
-                    <input type="number" id="ownerLabour" name="ownerLabour">
+                    <input type="number" id="ownerLabour" name="ownerLabour" value="{{ form_data.get('ownerLabour', '') }}">
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label for="electricity">Electricity</label>
-                    <input type="number" id="electricity" name="electricity">
+                    <input type="number" id="electricity" name="electricity" value="{{ form_data.get('electricity', '') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="transport">Transport</label>
-                    <input type="number" id="transport" name="transport">
+                    <input type="number" id="transport" name="transport" value="{{ form_data.get('transport', '') }}">
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label for="rent">Rent</label>
-                    <input type="number" id="rent" name="rent">
+                    <input type="number" id="rent" name="rent" value="{{ form_data.get('rent', '') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="maintenance">Maintenance</label>
-                    <input type="number" id="maintenance" name="maintenance">
+                    <input type="number" id="maintenance" name="maintenance" value="{{ form_data.get('maintenance', '') }}">
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label for="labour">Labour</label>
-                    <input type="number" id="labour" name="labour">
+                    <input type="number" id="labour" name="labour" value="{{ form_data.get('labour', '') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="extra">Extra</label>
-                    <input type="number" id="extra" name="extra">
+                    <input type="number" id="extra" name="extra" value="{{ form_data.get('extra', '') }}">
                 </div>
             </div>
 
@@ -127,29 +139,29 @@
 
                 <div class="form-group">
                     <label for="profit">Profit</label>
-                    <input type="number" id="profit" name="profit">
+                    <input type="number" id="profit" name="profit" value="{{ form_data.get('profit', '') }}">
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label for="packagingCost">Packaging Cost</label>
-                    <input type="number" id="packagingCost" name="packagingCost">
+                    <input type="number" id="packagingCost" name="packagingCost" value="{{ form_data.get('packagingCost', '') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="distributor">Distributor %</label>
-                    <input type="number" id="distributor" name="distributor" value="0">
+                    <input type="number" id="distributor" name="distributor" value="0" value="{{ form_data.get('distributor', '') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="wholeSeller">Whole Seller %</label>
-                    <input type="number" id="wholeSeller" name="wholeSeller" value="0">
+                    <input type="number" id="wholeSeller" name="wholeSeller" value="0" value="{{ form_data.get('wholeSeller', '') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="retailer">Retailer %</label>
-                    <input type="number" id="retailer" name="retailer" value="0">
+                    <input type="number" id="retailer" name="retailer" value="0" value="{{ form_data.get('retailer', '') }}">
                 </div>
             </div>
 
